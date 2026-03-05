@@ -1,0 +1,32 @@
+{
+  "name": "saas-admin-boilerplate",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^16.1.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "jose": "^6.0.11",
+    "otpauth": "^9.4.0",
+    "qrcode": "^1.5.4",
+    "@tanstack/react-table": "^8.21.3",
+    "recharts": "^2.15.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.1.0",
+    "lucide-react": "^0.484.0",
+    "@radix-ui/react-slot": "^1.1.2"
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^16.1.0",
+    "@tailwindcss/postcss": "^4.1.0",
+    "tailwindcss": "^4.1.0"
+  }
+}
