@@ -1,4 +1,4 @@
-# SaaS Admin Boilerplate
+# Template Admin with Login 2FA
 
 A production-ready SaaS Admin template built with Next.js 16 (App Router), Tailwind CSS v4, and shadcn/ui. This boilerplate features a complete authentication flow (JWT + MFA), Role-Based Access Control (RBAC), and beautifully crafted UI components using TanStack Table and Recharts.
 
