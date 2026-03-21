@@ -1,6 +1,9 @@
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { formatDate } from "@/lib/utils";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Eye, Edit } from "lucide-react";
 
 export const usersColumns = [
   {
@@ -67,5 +70,26 @@ export const usersColumns = [
         {formatDate(row.original.createdAt)}
       </span>
     ),
+  },
+  {
+    id: "actions",
+    header: "Actions",
+    cell: ({ row }) => {
+      const user = row.original;
+      return (
+        <div className="flex items-center gap-2">
+          <Link href={`/dashboard/users/${user.id}`}>
+            <Button variant="outline" size="icon" title="Detail">
+              <Eye className="h-4 w-4" />
+            </Button>
+          </Link>
+          <Link href={`/dashboard/users/${user.id}/edit`}>
+            <Button variant="outline" size="icon" title="Edit">
+              <Edit className="h-4 w-4" />
+            </Button>
+          </Link>
+        </div>
+      );
+    },
   },
 ];
