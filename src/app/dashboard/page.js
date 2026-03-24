@@ -1,8 +1,8 @@
 "use client";
 
-import { Header } from "@/components/layout/Header";
-import { RevenueChart } from "@/components/charts/RevenueChart";
-import { UsersBarChart } from "@/components/charts/UsersBarChart";
+import { Header } from "@/app/dashboard/_components/Header";
+import { RevenueChart } from "@/app/dashboard/_components/RevenueChart";
+import { UsersBarChart } from "@/app/dashboard/_components/UsersBarChart";
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, DollarSign, Activity, CreditCard } from "lucide-react";
 
