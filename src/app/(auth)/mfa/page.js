@@ -1,7 +1,7 @@
 import { MfaForm } from "@/components/forms/MfaForm";
 
 export const metadata = {
-  title: "Verify Identity",
+  title: "Verify Token",
 };
 
 export default function MfaPage() {
