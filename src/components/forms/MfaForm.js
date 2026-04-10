@@ -68,7 +68,7 @@ export function MfaForm() {
         </div>
         <CardTitle className="text-2xl">Two-Factor Authentication</CardTitle>
         <CardDescription>
-          Enter the 6-digit code from your authenticator app
+          Enter the 6-digit code from your authenticator
           {mfaEmail && (
             <span className="block mt-1 text-xs font-medium text-foreground">
               {mfaEmail}
