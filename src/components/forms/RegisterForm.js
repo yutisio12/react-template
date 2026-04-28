@@ -99,7 +99,7 @@ export function RegisterForm() {
 
           <Link href="/login">
             <Button className="w-full mt-4">
-              Continue to Login
+              Continue Login
             </Button>
           </Link>
         </CardContent>
@@ -115,7 +115,7 @@ export function RegisterForm() {
         </div>
         <CardTitle className="text-2xl">Create account</CardTitle>
         <CardDescription>
-          Get started with your new account
+          Get started with your account
         </CardDescription>
       </CardHeader>
       <CardContent>
