@@ -32,7 +32,7 @@ export function LoginForm() {
     <Card className="w-full max-w-md mx-auto border-0 shadow-2xl">
       <CardHeader className="text-center space-y-3">
         <div className="mx-auto flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-purple-600 text-white font-bold text-xl shadow-lg">
-          SA
+          Template 
         </div>
         <CardTitle className="text-2xl">Welcome back</CardTitle>
         <CardDescription>
