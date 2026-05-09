@@ -154,6 +154,68 @@ export function createUser({ name, email, password, role }) {
   return { user: safeUser, totpSecret: newUser.totpSecret };
 }
 
+export function updateUser(id, updates) {
+  const index = users.findIndex((u) => u.id === id);
+  if (index === -1) return { error: "User not found" };
+
+  if (updates.email && updates.email !== users[index].email) {
+    const existing = findUserByEmail(updates.email);
+    if (existing) return { error: "Email already exists" };
+  }
+
+  users[index] = { ...users[index], ...updates };
+
+  const { password: p, totpSecret: t, ...safeUpdated } = users[index];
+  return { user: safeUpdated };
+}
+
+export function deleteUser(id) {
+  const index = users.findIndex((u) => u.id === id);
+  if (index === -1) return { error: "User not found" };
+
+  users.splice(index, 1);
+  return { success: true };
+}
+
+export function bulkCreateUsers(userList) {
+  const created = [];
+  const errors = [];
+
+  userList.forEach((u, i) => {
+    const existing = findUserByEmail(u.email);
+    if (existing) {
+      errors.push({ row: i + 1, email: u.email, error: "Email already exists" });
+      return;
+    }
+
+    const newUser = {
+      id: generateId(),
+      name: u.name || `Imported User ${i + 1}`,
+      email: u.email,
+      password: u.password || "password123",
+      role: u.role || ROLES.USER,
+      permissions: ROLE_PERMISSIONS[u.role] || ROLE_PERMISSIONS[ROLES.USER],
+      totpSecret: `JBSWY3DPEHPK3P${Math.random().toString(36).substring(2, 4).toUpperCase()}`,
+      mfaEnabled: true,
+      status: u.status || "active",
+      photo: u.photo || null,
+      createdAt: new Date().toISOString(),
+      lastLogin: null,
+    };
+
+    users = [...users, newUser];
+    created.push(newUser);
+  });
+
+  return {
+    created: created.map(({ password, totpSecret, ...u }) => u),
+    errors,
+    totalProcessed: userList.length,
+    totalCreated: created.length,
+    totalErrors: errors.length,
+  };
+}
+
 export function getStats() {
   const roleCount = {};
   const statusCount = { active: 0, inactive: 0 };
