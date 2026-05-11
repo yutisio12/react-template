@@ -29,9 +29,9 @@ const data = [
 function CustomTooltip({ active, payload, label }) {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-background/95 backdrop-blur-sm border border-border rounded-lg p-3 shadow-lg">
-        <p className="text-sm font-medium">{label}</p>
-        <p className="text-sm text-primary font-bold">
+      <div className="bg-white border border-gray-100 rounded-xl p-3 shadow-xl shadow-black/5">
+        <p className="text-xs text-muted-foreground mb-1">{label}</p>
+        <p className="text-sm font-bold text-primary">
           ${payload[0].value.toLocaleString()}
         </p>
       </div>
@@ -51,25 +51,33 @@ export function RevenueChart() {
         <div className="h-[300px] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={data} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
-              <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
+              <CartesianGrid strokeDasharray="3 3" vertical={false} className="stroke-border/50" />
               <XAxis
                 dataKey="month"
-                className="text-xs"
                 tick={{ fill: "var(--color-muted-foreground)", fontSize: 12 }}
+                axisLine={false}
+                tickLine={false}
               />
               <YAxis
-                className="text-xs"
                 tick={{ fill: "var(--color-muted-foreground)", fontSize: 12 }}
                 tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`}
+                axisLine={false}
+                tickLine={false}
               />
               <Tooltip content={<CustomTooltip />} />
+              <defs>
+                <linearGradient id="revenueGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="var(--color-chart-1)" stopOpacity={0.2} />
+                  <stop offset="100%" stopColor="var(--color-chart-1)" stopOpacity={0} />
+                </linearGradient>
+              </defs>
               <Line
                 type="monotone"
                 dataKey="revenue"
                 stroke="var(--color-chart-1)"
                 strokeWidth={2.5}
-                dot={{ fill: "var(--color-chart-1)", strokeWidth: 2, r: 4 }}
-                activeDot={{ r: 6, strokeWidth: 0, fill: "var(--color-chart-1)" }}
+                dot={false}
+                activeDot={{ r: 5, strokeWidth: 3, stroke: "#fff", fill: "var(--color-chart-1)" }}
               />
             </LineChart>
           </ResponsiveContainer>
