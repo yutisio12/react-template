@@ -11,13 +11,14 @@ import {
   LayoutDashboard,
   Users,
   ShieldCheck,
+  UserCircle,
   LogOut,
-  ChevronLeft,
-  ChevronRight,
+  PanelLeftClose,
+  PanelLeft,
+  Sparkles,
 } from "lucide-react";
 import { useState } from "react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Separator } from "@/components/ui/separator";
 
 const navItems = [
   {
@@ -38,6 +39,12 @@ const navItems = [
     icon: ShieldCheck,
     permission: PERMISSIONS.VIEW_ADMIN_PAGE,
   },
+  {
+    label: "Profile",
+    href: "/dashboard/profile",
+    icon: UserCircle,
+    permission: null,
+  },
 ];
 
 export function Sidebar() {
@@ -46,23 +53,23 @@ export function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
 
   const filteredNav = navItems.filter(
-    (item) => user && hasPermission(user, item.permission)
+    (item) => item.permission === null || (user && hasPermission(user, item.permission))
   );
 
   return (
     <aside
       className={cn(
-        "h-screen sticky top-0 flex flex-col border-r border-sidebar-border bg-sidebar transition-all duration-300 ease-in-out",
-        collapsed ? "w-[72px]" : "w-64"
+        "h-screen sticky top-0 flex flex-col glass-sidebar border-r border-white/20 transition-all duration-300 ease-in-out",
+        collapsed ? "w-[76px]" : "w-[260px]"
       )}
     >
       {/* Logo */}
-      <div className="flex items-center gap-3 px-4 h-16 border-b border-sidebar-border">
-        <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-primary to-purple-600 text-white font-bold text-sm shrink-0">
-          SA
+      <div className="flex items-center gap-3 px-5 h-16 shrink-0">
+        <div className="gradient-primary flex items-center justify-center w-9 h-9 rounded-xl text-white font-bold text-sm shrink-0 shadow-lg shadow-primary/25">
+          <Sparkles className="h-5 w-5" />
         </div>
         {!collapsed && (
-          <span className="font-bold text-lg text-foreground tracking-tight">
+          <span className="font-bold text-lg text-gradient tracking-tight">
             {APP_CONFIG.name}
           </span>
         )}
@@ -80,31 +87,29 @@ export function Sidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
+                "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200",
                 isActive
-                  ? "bg-sidebar-accent text-sidebar-accent-foreground shadow-sm"
-                  : "text-sidebar-foreground hover:bg-accent hover:text-accent-foreground"
+                  ? "gradient-primary text-white shadow-lg shadow-primary/25"
+                  : "text-sidebar-foreground hover:bg-primary/5 hover:text-primary"
               )}
             >
-              <item.icon className="h-5 w-5 shrink-0" />
+              <item.icon className={cn("h-5 w-5 shrink-0", isActive && "text-white")} />
               {!collapsed && <span>{item.label}</span>}
             </Link>
           );
         })}
       </nav>
 
-      <Separator />
-
       {/* User Info + Logout */}
       <div className="p-3 space-y-2">
         {user && !collapsed && (
-          <div className="flex items-center gap-3 px-3 py-2">
-            <Avatar className="h-8 w-8">
-              <AvatarFallback name={user.name} className="text-xs" />
+          <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-muted/50">
+            <Avatar className="h-8 w-8 ring-2 ring-primary/20">
+              <AvatarFallback name={user.name} className="text-xs bg-primary/10 text-primary" />
             </Avatar>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium truncate">{user.name}</p>
-              <p className="text-xs text-muted-foreground truncate capitalize">
+              <p className="text-sm font-semibold truncate">{user.name}</p>
+              <p className="text-[11px] text-muted-foreground truncate capitalize">
                 {user.role}
               </p>
             </div>
@@ -114,7 +119,7 @@ export function Sidebar() {
         <button
           onClick={logout}
           className={cn(
-            "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium w-full text-sidebar-foreground hover:bg-destructive/10 hover:text-destructive transition-all duration-200 cursor-pointer",
+            "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium w-full text-muted-foreground hover:bg-red-50 hover:text-red-600 transition-all duration-200 cursor-pointer",
           )}
         >
           <LogOut className="h-5 w-5 shrink-0" />
@@ -125,14 +130,16 @@ export function Sidebar() {
       {/* Collapse Toggle */}
       <button
         onClick={() => setCollapsed(!collapsed)}
-        className={`absolute -right-3 top-1/2 flex items-center justify-center w-8 h-8 rounded-full border bg-background shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer
-        ${!collapsed ? '' : 'bg-purple-500 text-white'}
-        `}
+        className={cn(
+          "absolute -right-3.5 top-20 flex items-center justify-center w-7 h-7 rounded-full shadow-md transition-all duration-200 cursor-pointer z-50",
+          "bg-white border border-gray-100 hover:shadow-lg hover:scale-110",
+          collapsed && "gradient-primary border-0 text-white"
+        )}
       >
         {collapsed ? (
-          <ChevronRight className="h-4 w-4 font-bold" />
+          <PanelLeft className="h-3.5 w-3.5" />
         ) : (
-          <ChevronLeft className="h-4 w-4 font-bold" />
+          <PanelLeftClose className="h-3.5 w-3.5" />
         )}
       </button>
     </aside>
