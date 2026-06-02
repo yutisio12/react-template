@@ -9,24 +9,28 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "^16.1.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "jose": "^6.0.11",
-    "otpauth": "^9.4.0",
-    "qrcode": "^1.5.4",
+    "@radix-ui/react-slot": "^1.1.2",
     "@tanstack/react-table": "^8.21.3",
-    "recharts": "^2.15.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "tailwind-merge": "^3.1.0",
+    "jose": "^6.0.11",
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.7",
     "lucide-react": "^0.484.0",
-    "@radix-ui/react-slot": "^1.1.2"
+    "next": "^16.1.0",
+    "otpauth": "^9.4.0",
+    "qrcode": "^1.5.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "recharts": "^2.15.3",
+    "sweetalert2": "^11.26.24",
+    "tailwind-merge": "^3.1.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.0",
     "eslint": "^9.0.0",
     "eslint-config-next": "^16.1.0",
-    "@tailwindcss/postcss": "^4.1.0",
     "tailwindcss": "^4.1.0"
   }
 }

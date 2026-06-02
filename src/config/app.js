@@ -26,4 +26,5 @@ export const ROUTES = {
   dashboard: "/dashboard",
   users: "/dashboard/users",
   admin: "/dashboard/admin",
+  profile: "/dashboard/profile",
 };

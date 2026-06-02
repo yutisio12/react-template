@@ -91,6 +91,10 @@ export function AuthProvider({ children }) {
     }
   }, [router]);
 
+  const updateUser = useCallback((updatedUser) => {
+    setUser((prev) => (prev ? { ...prev, ...updatedUser } : prev));
+  }, []);
+
   const value = {
     user,
     loading,
@@ -100,6 +104,7 @@ export function AuthProvider({ children }) {
     register,
     verifyMfa,
     logout,
+    updateUser,
     fetchUser,
     clearError,
     isAuthenticated: !!user,
