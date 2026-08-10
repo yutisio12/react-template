@@ -36,7 +36,7 @@ export function LoginForm() {
         </div>
         <CardTitle className="text-2xl">Welcome back</CardTitle>
         <CardDescription>
-          Sign in to your account to continue
+          Sign in
         </CardDescription>
       </CardHeader>
       <CardContent>
