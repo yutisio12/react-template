@@ -39,7 +39,7 @@ export async function generateQRCode(otpauthUrl) {
       width: 256,
       margin: 2,
       color: {
-        dark: "#000026",
+        dark: "#000000",
         light: "#ffffff",
       },
     });
